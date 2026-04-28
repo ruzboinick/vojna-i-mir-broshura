@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Война и мир. Интерактивная брошюра</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #magazine {
+            width: 2400px;
+            height: 1698px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        #magazine .page {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+        }
+
+        #magazine .hard {
+            background: transparent !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+
+        #magazine img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="magazine">
+        <!-- Передняя обложка -->
+        <div class="hard">
+            <img src="pages/cover_front.jpg" alt="Передняя обложка">
+        </div>
+
+        <!-- Страница 1 -->
+        <div><img src="pages/page1.jpg" alt="Страница 1"></div>
+        <!-- Страница 2 -->
+        <div><img src="pages/page2.jpg" alt="Страница 2"></div>
+        <!-- Страница 3 -->
+        <div><img src="pages/page3.jpg" alt="Страница 3"></div>
+        <!-- Страница 4 -->
+        <div><img src="pages/page4.jpg" alt="Страница 4"></div>
+        <!-- Страница 5 -->
+        <div><img src="pages/page5.jpg" alt="Страница 5"></div>
+        <!-- Страница 6 -->
+        <div><img src="pages/page6.jpg" alt="Страница 6"></div>
+        <!-- Страница 7 -->
+        <div><img src="pages/page7.jpg" alt="Страница 7"></div>
+        <!-- Страница 8 -->
+        <div><img src="pages/page8.jpg" alt="Страница 8"></div>
+        <!-- Страница 9 -->
+        <div><img src="pages/page9.jpg" alt="Страница 9"></div>
+        <!-- Страница 10 -->
+        <div><img src="pages/page10.jpg" alt="Страница 10"></div>
+        <!-- Страница 11 -->
+        <div><img src="pages/page11.jpg" alt="Страница 11"></div>
+        <!-- Страница 12 -->
+        <div><img src="pages/page12.jpg" alt="Страница 12"></div>
+        <!-- Страница 13 -->
+        <div><img src="pages/page13.jpg" alt="Страница 13"></div>
+        <!-- Страница 14 -->
+        <div><img src="pages/page14.jpg" alt="Страница 14"></div>
+        <!-- Страница 15 -->
+        <div><img src="pages/page15.jpg" alt="Страница 15"></div>
+        <!-- Страница 16 -->
+        <div><img src="pages/page16.jpg" alt="Страница 16"></div>
+        <!-- Страница 17 -->
+        <div><img src="pages/page17.jpg" alt="Страница 17"></div>
+        <!-- Страница 18 -->
+        <div><img src="pages/page18.jpg" alt="Страница 18"></div>
+        <!-- Страница 19 -->
+        <div><img src="pages/page19.jpg" alt="Страница 19"></div>
+        <!-- Страница 20 -->
+        <div><img src="pages/page20.jpg" alt="Страница 20"></div>
+        <!-- Страница 21 -->
+        <div><img src="pages/page21.jpg" alt="Страница 21"></div>
+        <!-- Страница 22 -->
+        <div><img src="pages/page22.jpg" alt="Страница 22"></div>
+        <!-- Страница 23 -->
+        <div><img src="pages/page23.jpg" alt="Страница 23"></div>
+        <!-- Страница 24 -->
+        <div><img src="pages/page24.jpg" alt="Страница 24"></div>
+        <!-- Страница 25 -->
+        <div><img src="pages/page25.jpg" alt="Страница 25"></div>
+        <!-- Страница 26 -->
+        <div><img src="pages/page26.jpg" alt="Страница 26"></div>
+        <!-- Страница 27 -->
+        <div><img src="pages/page27.jpg" alt="Страница 27"></div>
+        <!-- Страница 28 -->
+        <div><img src="pages/page28.jpg" alt="Страница 28"></div>
+        <!-- Страница 29 -->
+        <div><img src="pages/page29.jpg" alt="Страница 29"></div>
+        <!-- Страница 30 -->
+        <div><img src="pages/page30.jpg" alt="Страница 30"></div>
+        <!-- Страница 31 -->
+        <div><img src="pages/page31.jpg" alt="Страница 31"></div>
+        <!-- Страница 32 -->
+        <div><img src="pages/page32.jpg" alt="Страница 32"></div>
+        <!-- Страница 33 -->
+        <div><img src="pages/page33.jpg" alt="Страница 33"></div>
+        <!-- Страница 34 -->
+        <div><img src="pages/page34.jpg" alt="Страница 34"></div>
+
+        <!-- Задняя обложка -->
+        <div class="hard">
+            <img src="pages/cover_back.jpg" alt="Задняя обложка">
+        </div>
+    </div>
+
+<script src="jquery.min.js"></script>
+<script src="turn.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var totalPages = $('#magazine').children().length;
+
+        // Автоподгонка размера под экран
+        function resizeBook() {
+            var windowW = $(window).width();
+            var windowH = $(window).height();
+            var ratio = 2400 / 1698;
+            var maxW = windowW - 160;
+            var maxH = windowH - 80;
+            var newW, newH;
+
+            if (maxW / maxH > ratio) {
+                newH = maxH;
+                newW = newH * ratio;
+            } else {
+                newW = maxW;
+                newH = newW / ratio;
+            }
+
+            $('#magazine').css({
+                width: newW + 'px',
+                height: newH + 'px'
+            });
+        }
+
+        resizeBook();
+        $(window).resize(resizeBook);
+
+        // Запуск Turn.js
+        $('#magazine').turn({
+            display: 'double',
+            acceleration: true,
+            gradients: true,
+            elevation: 50,
+            duration: 800,
+            pages: totalPages,
+            range: 3
+        });
+
+        // Стрелки и подсказка
+        $('<style>')
+            .text(`
+                .flip-arrow {
+                    position: fixed; top: 50%; transform: translateY(-50%);
+                    width: 80px; height: 120px; cursor: pointer; z-index: 9999;
+                    display: flex; align-items: center; justify-content: center;
+                    transition: background 0.2s; border-radius: 8px; user-select: none;
+                }
+                .flip-arrow:hover { background: rgba(255, 255, 255, 0.08); }
+                .flip-arrow svg { width: 36px; height: 36px; opacity: 0.25; transition: opacity 0.2s; }
+                .flip-arrow:hover svg { opacity: 0.8; }
+                #prev-arrow { left: 0; }
+                #next-arrow { right: 0; }
+                #fullscreen-hint {
+                    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+                    color: rgba(255,255,255,0.5); font-family: Georgia, serif;
+                    font-size: 18px; z-index: 10000; pointer-events: none; transition: opacity 0.6s;
+                }
+            `)
+            .appendTo('head');
+
+        // Стрелка "Назад"
+        $('<div>')
+            .attr('id', 'prev-arrow')
+            .addClass('flip-arrow')
+            .html('<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>')
+            .on('click', function(e) { e.stopPropagation(); $('#magazine').turn('previous'); })
+            .appendTo('body');
+
+        // Стрелка "Вперёд"
+        $('<div>')
+            .attr('id', 'next-arrow')
+            .addClass('flip-arrow')
+            .html('<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>')
+            .on('click', function(e) { e.stopPropagation(); $('#magazine').turn('next'); })
+            .appendTo('body');
+
+        // Подсказка
+        var $hint = $('<div id="fullscreen-hint">Кликните в любом месте, чтобы открыть во весь экран</div>').appendTo('body');
+
+        // Фуллскрин с перезагрузкой размеров (фикс серых краёв)
+        $(document).on('click', function() {
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) { elem.requestFullscreen(); }
+            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+            else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
+
+            $hint.css('opacity', '0');
+            setTimeout(function() { $hint.remove(); }, 600);
+
+            // Ждём переход в фуллскрин и пересобираем книгу
+            setTimeout(function() {
+                resizeBook();
+                $('#magazine').turn('size', $('#magazine').width(), $('#magazine').height());
+                var currentPage = $('#magazine').turn('page');
+                $('#magazine').turn('page', 1);
+                setTimeout(function() {
+                    $('#magazine').turn('page', currentPage);
+                }, 100);
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>
